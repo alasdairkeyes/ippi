@@ -12,4 +12,8 @@ class Owner extends Model
     {
         return $this->HasMany(IpRange::class);
     }
+
+    public function number_of_ranges() {
+        return count($this->ip_ranges);
+    }
 }
