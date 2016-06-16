@@ -16,4 +16,8 @@ class IpRange extends Model
     {
         return $this->belongsTo(Owner::class);
     }
+
+    public function network_cidr() {
+        return join(' / ', [ $this->network, $this->cidr ]);
+    }
 }
