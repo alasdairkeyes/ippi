@@ -39,16 +39,24 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                <a title="The IP Private I" class="navbar-brand" href="{{ url('/') }}">
+                    IPPI
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <li><a href="{{ url('/') }}">Home</a></li>
                 </ul>
+                @if (!Auth::guest())
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/ip_ranges') }}">IP Ranges</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/ip_owners') }}">IP Owners</a></li>
+                    </ul>
+                @endif
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
