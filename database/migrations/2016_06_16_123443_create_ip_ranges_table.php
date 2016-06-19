@@ -20,6 +20,9 @@ class CreateIpRangesTable extends Migration
             $table->integer('owner_id')->unsigned();
             $table->timestamps();
 
+            $table->unique([
+                'owner_id', 'network', 'cidr',
+            ]);
             $table->foreign('owner_id')
                   ->references('id')->on('owners')
                   ->onDelete('cascade')
