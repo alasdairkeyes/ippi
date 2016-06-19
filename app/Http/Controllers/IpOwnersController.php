@@ -11,7 +11,7 @@ use App\Owner;
 class IpOwnersController extends Controller
 {
     /**
-     * Show the .
+     * Show the /ip_ranges path
      *
      * @return \Illuminate\Http\Response
      */
@@ -21,5 +21,51 @@ class IpOwnersController extends Controller
         return view('ip_owners_index', [
             'ip_owners' => $ip_owners,
         ]);
+    }
+
+
+    /**
+     * Show the /ip_ranges/add path
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ip_owners_add(Request $request)
+    {
+
+        return view('ip_owners_add', []);
+    }
+
+
+    /**
+     * Post the /ip_ranges/add path
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ip_owners_add_post(Request $request)
+    {
+
+        // Validate the name
+        $this->validate($request, [
+            'name'          => 'required|max:255',
+        ]);
+        
+        // Create/Insert
+        $owner = null;
+        try {
+            $owner = Owner::create([
+                'name'          => $request->name,
+                'description'   => $request->description,
+            ]);
+        } catch (\Illuminate\Database\QueryException $e) {
+
+            // If
+            if ($e->errorInfo['0'] == '23000') {
+                return redirect()->back()->withInput()->withErrors(['name' => 'This name is already in use']);
+                // Duplicate key
+            }
+        }
+
+        return redirect('/ip_owners/');
+
     }
 }

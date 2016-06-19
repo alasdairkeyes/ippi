@@ -22,6 +22,9 @@
                       </tr>
                     </thead>
                     <tbody>
+
+                      @include('shards.add_owner_row')
+
                       @foreach ($ip_owners as $ip_owner)
                       <tr>
                         <td>{{ $ip_owner->name }}</td>
@@ -30,6 +33,12 @@
                         <td>&nbsp;</td>
                       </tr>
                       @endforeach
+
+
+                      @if (count($ip_owners) > 10)
+                        @include('shards.add_owner_row')
+                      @endif
+
                     </tbody>
                   </table>
                 </div>
