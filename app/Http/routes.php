@@ -16,7 +16,9 @@ Route::auth();
 Route::get('/', 'HomeController@index');
 
 
-Route::get('/ip_ranges',        'IpRangesController@ip_ranges_index');
-Route::get('/ip_owners',        'IpOwnersController@ip_owners_index');
-Route::get('/ip_owners/add',    'IpOwnersController@ip_owners_add');
-Route::post('/ip_owners/add',   'IpOwnersController@ip_owners_add_post');
+Route::get('/ip_ranges',                'IpRangesController@ip_ranges_index');
+Route::get('/ip_owners',                'IpOwnersController@ip_owners_index');
+Route::get('/ip_owners/add',            'IpOwnersController@ip_owners_add');
+Route::post('/ip_owners/add',           'IpOwnersController@ip_owners_add_post');
+Route::get('/ip_owners/{id}/delete/',   'IpOwnersController@ip_owners_delete');
+Route::post('/ip_owners/{id}/delete/',  'IpOwnersController@ip_owners_delete_post');

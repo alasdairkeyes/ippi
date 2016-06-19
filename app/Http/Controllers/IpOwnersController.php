@@ -68,4 +68,32 @@ class IpOwnersController extends Controller
         return redirect('/ip_owners/');
 
     }
+
+
+    /**
+     * Show the /ip_owners/{id}/delete path
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ip_owners_delete($id)
+    {
+
+        return view('ip_owners_delete', [
+            'ip_owner'  => Owner::findOrFail($id),
+        ]);
+    }
+
+
+    /**
+     * Post to the /ip_owners/{id}/delete path
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ip_owners_delete_post($id)
+    {
+
+        $ip_owner = Owner::findOrFail($id);
+        $ip_owner->delete();
+        return redirect('/ip_owners');
+    }
 }

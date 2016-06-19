@@ -18,6 +18,7 @@
                         <th>IP Owner</th>
                         <th>Description</th>
                         <th>Number of ranges</th>
+                        <th width="10">Actions</th>
                         <th>Tags</th>
                       </tr>
                     </thead>
@@ -30,6 +31,9 @@
                         <td>{{ $ip_owner->name }}</td>
                         <td><span title="{{ $ip_owner->description }}">{{ $ip_owner->description }}</td>
                         <td>{{ $ip_owner->number_of_ranges() }}</td>
+                        <td>
+                            <a href="/ip_owners/{{ $ip_owner->id }}/delete" title="Delete '{{ $ip_owner->name }}'"><span class="glyphicon glyphicon-trash" aria-hidden=true></span></a>
+                        </td>
                         <td>&nbsp;</td>
                       </tr>
                       @endforeach
