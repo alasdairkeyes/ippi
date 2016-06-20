@@ -5,6 +5,8 @@ use Illuminate\Database\Seeder;
 use App\User;
 use App\Permission;
 use App\Role;
+use App\Owner;
+use App\IpRange;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionsTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(OwnersTableSeeder::class);
+        $this->call(IpRangesTableSeeder::class);
     }
 }
 
@@ -85,5 +89,46 @@ class RoleTableSeeder extends Seeder
 
         $permissions = Permission::all();
         $admin_role->assign_permissions($permissions);
+    }
+}
+
+class OwnersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('owners')->delete();
+
+        $admin_role = Owner::create([
+                'name'          => 'Default',
+                'description'   => 'Default IP owner',
+        ]);
+    }
+}
+
+
+class IpRangesTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('ip_ranges')->delete();
+
+        $default_owner = Owner::where('name', 'Default')->first();
+
+        $ip_range = IpRange::create([
+            'network'       => '192.168.0.0',
+            'cidr'          => '24',
+            'ip_version'    => '4',
+            'owner_id'      => $default_owner->id,
+        ]);
     }
 }
