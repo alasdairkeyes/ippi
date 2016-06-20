@@ -35,19 +35,6 @@ namespace App\Utils;
 
 
     /**
-     * Returns a sha256 hashed password
-     *
-     * @param string $password Password to hash
-     * @param string $salt     Salt to hash with password
-     * @return string
-     */
-
-    function hash_password($password, $salt) {
-        return hash('sha256', $password . $salt);
-    }
-
-
-    /**
      * Validates a hostname
      *
      * @param string $hostname Hostname to check
