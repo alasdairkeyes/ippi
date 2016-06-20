@@ -28,4 +28,15 @@ class User extends Authenticatable
     {
         return $this->HasMany(UserRole::class);
     }
+
+
+    public function assign_role($roles = [])
+    {
+        foreach ($roles as $role) {
+            $this->user_roles()->create([
+                'user_id'     => $this->id,
+                'role_id'     => $role->id,
+            ]);
+        };
+    }
 }

@@ -16,4 +16,14 @@ class Role extends Model
     {
         return $this->HasMany(Permission::class);
     }
+
+    public function assign_permissions($permissions = [])
+    {
+        foreach ($permissions as $permission) {
+            $this->role_permissions()->create([
+                'permission_id'     => $permission->id,
+                'role_id'           => $this->id,
+            ]);
+        }
+    }
 }
