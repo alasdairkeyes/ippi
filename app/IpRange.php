@@ -49,7 +49,7 @@ class IpRange extends Model
 
 
     public function ip_addresses_in_use() {
-        return count($this->ip_addresses());
+        return count($this->ip_addresses);
     }
 
 
