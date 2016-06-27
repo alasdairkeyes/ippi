@@ -72,4 +72,14 @@ class IpRange extends Model
         return $this->ip_block()->getLastIp();
     }
 
+    public function contains_ip_range ($ip_block) {
+        // Check this block doesn't contain another block
+        return $this->ip_block()->contains($ip_block);
+    }
+
+    public function is_in_ip_range ($ip_block) {
+        // Check this block isn't in another block
+        return $this->ip_block()->isIn($ip_block);
+    }
+
 }
