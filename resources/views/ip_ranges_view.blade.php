@@ -53,7 +53,9 @@
                               @endif
                           </td>
                           <td>
-                              <a href="/ip_ranges/{{ $ip_range->id }}/ip_addresses/{{ $ip_address_array[0] }}" title="Update '{{ $ip_address_array[0] }}'"><span class="glyphicon glyphicon-pencil" aria-hidden=true></span></a>
+                              @if (!$ip_range->is_reserved_address($ip_address_array[0]))
+                                <a href="/ip_ranges/{{ $ip_range->id }}/ip_addresses/{{ $ip_address_array[0] }}" title="Update '{{ $ip_address_array[0] }}'"><span class="glyphicon glyphicon-pencil" aria-hidden=true></span></a>
+                              @endif
                               @if ( $ip_address_array[1] )
                                 &nbsp;<a href="/ip_ranges/{{ $ip_range->id }}/ip_addresses/{{ $ip_address_array[0] }}/delete" title="Clear '{{ $ip_address_array[0] }}'"><span class="glyphicon glyphicon-trash" aria-hidden=true></span></a>
                               @endif
