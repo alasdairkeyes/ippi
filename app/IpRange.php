@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class IpRange extends Model
 {
+
+    protected $fillable = ['network','cidr','owner_id','ip_version'];
+
     // Internal storage for IPBlock object
     private $_ip_block;
 
