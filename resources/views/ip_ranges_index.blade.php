@@ -23,6 +23,8 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @include('shards.add_ip_range_row')
+
                       @foreach ($ip_ranges as $ip_range)
                       <tr>
                         <td>{{ $ip_range->network_cidr() }}</td>
