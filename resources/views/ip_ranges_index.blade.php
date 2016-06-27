@@ -36,6 +36,7 @@
                         </td>
                         <td>
                             <a href="/ip_ranges/{{ $ip_range->id }}/delete" title="Delete '{{ $ip_range->network_cidr() }}'"><span class="glyphicon glyphicon-trash" aria-hidden=true></span></a>
+                            <a href="/ip_ranges/{{ $ip_range->id }}" title="View '{{ $ip_range->network_cidr() }}'"><span class="glyphicon glyphicon-search" aria-hidden=true></span></a>
                         </td>
                         <td>
                         </td>

@@ -119,4 +119,18 @@ class IpRangesController extends Controller
         $ip_range->delete();
         return redirect('/ip_ranges');
     }
+
+
+    /**
+     * Show the /ip_ranges/{id} path
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ip_ranges_view($id)
+    {
+        $ip_range =  IpRange::findOrFail($id);
+        return view('ip_ranges_view', [
+            'ip_range'  => $ip_range,
+        ]);
+    }
 }
