@@ -19,6 +19,7 @@
                         <th>Owner</th>
                         <th width="10%">Version</th>
                         <th>Size</th>
+                        <th>Action</th>
                         <th>Tags</th>
                       </tr>
                     </thead>
@@ -32,6 +33,9 @@
                         <td>IPv{{ $ip_range->ip_version }}</td>
                         <td>
                             @include('shards.ip_range_usage')
+                        </td>
+                        <td>
+                            <a href="/ip_ranges/{{ $ip_range->id }}/delete" title="Delete '{{ $ip_range->network_cidr() }}'"><span class="glyphicon glyphicon-trash" aria-hidden=true></span></a>
                         </td>
                         <td>
                         </td>

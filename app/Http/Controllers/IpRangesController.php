@@ -92,4 +92,31 @@ class IpRangesController extends Controller
         return redirect('/ip_ranges');
 
     }
+
+
+    /**
+     * Show the /ip_ranges/{id}/delete path
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ip_ranges_delete($id)
+    {
+
+        return view('ip_ranges_delete', [
+            'ip_range'  => IpRange::findOrFail($id),
+        ]);
+    }
+
+    /**
+     * Post to the /ip_ranges/{id}/delete path
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ip_ranges_delete_post($id)
+    {
+
+        $ip_range = IpRange::findOrFail($id);
+        $ip_range->delete();
+        return redirect('/ip_ranges');
+    }
 }
