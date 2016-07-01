@@ -9,6 +9,10 @@ use App\Http\Requests;
 use App\IpRange;
 use App\Owner;
 
+include_once(app_path().'/Utils.php');
+
+use function App\Utils\validHostname;
+
 class IpRangesController extends Controller
 {
     /**
@@ -16,7 +20,7 @@ class IpRangesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_ranges_index()
+    public function ipRangesIndex()
     {
         $ip_ranges = IpRange::all();
         return view('ip_ranges_index', [
@@ -30,11 +34,11 @@ class IpRangesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_ranges_add(Request $request)
+    public function ipRangesAdd(Request $request)
     {
 
         return view('ip_ranges_add', [
-            'ip_owners' => $ip_owners = Owner::all(),
+            'ip_owners' => Owner::all(),
         ]);
     }
 
@@ -43,7 +47,7 @@ class IpRangesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_ranges_add_post(Request $request)
+    public function ipRangesAddPost(Request $request)
     {
 
         // Validate the name
@@ -54,15 +58,15 @@ class IpRangesController extends Controller
         ]);
 
         // Validate Owner
-        $ip_owner = Owner::where('id',$request->owner_id)->first();
-        if (!$ip_owner) {
+        $ipOwner = Owner::where('id',$request->owner_id)->first();
+        if (!$ipOwner) {
             return redirect()->back()->withInput()->withErrors(['owner_id' => "This owner doesn't exist"]);
         }
 
         // Validate IP Range supplied
-        $ip_block = null;
+        $ipBlock = null;
         try {
-            $ip_block = \IPBlock::create($request->network, $request->cidr);
+            $ipBlock = \IPBlock::create($request->network, $request->cidr);
         } catch (Exception $e) {
                 return redirect()->back()->withInput()->withErrors([
                     'network'   => 'Invalid network/cidr combination',
@@ -71,21 +75,21 @@ class IpRangesController extends Controller
         }
 
         // Make sure customer's other ranges don't conflict
-        foreach ($ip_owner->ip_ranges as $existing_ip_range) {
+        foreach ($ipOwner->ipRanges as $existingIpRange) {
 
-            if ($existing_ip_range->is_in_ip_range($ip_block)) {
-                return redirect()->back()->withInput()->withErrors(['network' => "IP Range is contains an existing range " . $existing_ip_range->network_cidr() ]);
+            if ($existingIpRange->isInIpRange($ipBlock)) {
+                return redirect()->back()->withInput()->withErrors(['network' => "IP Range is contains an existing range " . $existingIpRange->networkCidr() ]);
             }
-            if ($existing_ip_range->contains_ip_range($ip_block)) {
-                return redirect()->back()->withInput()->withErrors(['network' => "IP Range is contained in existing range " . $existing_ip_range->network_cidr() ]);
+            if ($existingIpRange->containsIpRange($ipBlock)) {
+                return redirect()->back()->withInput()->withErrors(['network' => "IP Range is contained in existing range " . $existingIpRange->networkCidr() ]);
             }
         }
 
         // Create/Insert
-        $ip_range = $ip_owner->ip_ranges()->create([
+        $ipRange = $ipOwner->ipRanges()->create([
             'network'       => $request->network,
             'cidr'          => $request->cidr,
-            'ip_version'    => $ip_block->getFirstIp()->getVersion(),
+            'ip_version'    => $ipBlock->getFirstIp()->getVersion(),
         ]);
 
         // Redirect back to Ip Ranges page
@@ -99,7 +103,7 @@ class IpRangesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_ranges_delete($id)
+    public function ipRangesDelete($id)
     {
 
         return view('ip_ranges_delete', [
@@ -112,11 +116,11 @@ class IpRangesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_ranges_delete_post($id)
+    public function ipRangesDeletePost($id)
     {
 
-        $ip_range = IpRange::findOrFail($id);
-        $ip_range->delete();
+        $ipRange = IpRange::findOrFail($id);
+        $ipRange->delete();
         return redirect('/ip_ranges');
     }
 
@@ -126,11 +130,65 @@ class IpRangesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_ranges_view($id)
+    public function ipRangesView($id)
     {
-        $ip_range =  IpRange::findOrFail($id);
+        $ipRange =  IpRange::findOrFail($id);
         return view('ip_ranges_view', [
-            'ip_range'  => $ip_range,
+            'ip_range'  => $ipRange,
         ]);
+    }
+
+
+    /**
+     * Edit/Update the an IP address
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ipRangesIpAddressesView(Request $request, $id, $ipAddressString) {
+        // Get Range
+        $ipRange   =  IpRange::findOrFail($id);
+
+        // Get IP Address
+        $ipAddress =  $ipRange->ipAddresses()->where('address', $ipAddressString)->first();
+
+        return view('ip_ranges_ip_addresses_view', [
+            'ip_range'          => $ipRange,
+            'ip_address'        => $ipAddress,
+            'ip_address_string' => $ipAddressString,
+        ]);
+    }
+
+    public function ipRangesIpAddressesViewPost(Request $request, $id, $ipAddressString) {
+        // Get Range
+        $ipRange   =  IpRange::findOrFail($id);
+
+        // Validate the name
+        // TODO: Write custom hostname validator
+        $this->validate($request, [
+            'hostname'      => 'required|string',
+            'description'   => 'required|string',
+        ]);
+
+        error_log(validHostname($request->hostname));
+        if (!validHostname($request->hostname)) {
+            return redirect()->back()->withInput()->withErrors(['hostname' => "Invalid Hostname" ]);
+        }
+
+        // Get IP Address
+        $ipAddress =  $ipRange->ipAddresses()->firstOrNew([
+            'address'    => $ipAddressString,
+        ]);
+//        error_log(print_r($ipAddress,1));
+//        dd($ipAddress);
+//        exit;
+
+        $ipAddress->fill([
+            'hostname'      => $request->hostname,
+            'description'   => $request->description,
+        ]);
+        $ipAddress->save();
+
+
+        return redirect('/ip_ranges/' . $ipRange->id);
     }
 }

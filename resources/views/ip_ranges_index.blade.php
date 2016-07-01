@@ -28,15 +28,15 @@
 
                       @foreach ($ip_ranges as $ip_range)
                       <tr>
-                        <td>{{ $ip_range->network_cidr() }}</td>
+                        <td>{{ $ip_range->networkCidr() }}</td>
                         <td>{{ $ip_range->owner->name }}</td>
-                        <td>IPv{{ $ip_range->ip_version }}</td>
+                        <td>IPv{{ $ip_range->ipVersion }}</td>
                         <td>
                             @include('shards.ip_range_usage')
                         </td>
                         <td>
-                            <a href="/ip_ranges/{{ $ip_range->id }}/delete" title="Delete '{{ $ip_range->network_cidr() }}'"><span class="glyphicon glyphicon-trash" aria-hidden=true></span></a>
-                            <a href="/ip_ranges/{{ $ip_range->id }}" title="View '{{ $ip_range->network_cidr() }}'"><span class="glyphicon glyphicon-search" aria-hidden=true></span></a>
+                            <a href="/ip_ranges/{{ $ip_range->id }}/delete" title="Delete '{{ $ip_range->networkCidr() }}'"><span class="glyphicon glyphicon-trash" aria-hidden=true></span></a>
+                            <a href="/ip_ranges/{{ $ip_range->id }}" title="View '{{ $ip_range->networkCidr() }}'"><span class="glyphicon glyphicon-search" aria-hidden=true></span></a>
                         </td>
                         <td>
                         </td>

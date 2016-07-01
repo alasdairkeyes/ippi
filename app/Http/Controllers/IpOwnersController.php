@@ -15,7 +15,7 @@ class IpOwnersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_owners_index()
+    public function ipOwnersIndex()
     {
         $ip_owners = Owner::all();
         return view('ip_owners_index', [
@@ -29,7 +29,7 @@ class IpOwnersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_owners_add(Request $request)
+    public function ipOwnersAdd(Request $request)
     {
 
         return view('ip_owners_add', []);
@@ -41,7 +41,7 @@ class IpOwnersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_owners_add_post(Request $request)
+    public function ipOwnersAddPost(Request $request)
     {
 
         // Validate the name
@@ -75,7 +75,7 @@ class IpOwnersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_owners_delete($id)
+    public function ipOwnersDelete($id)
     {
 
         return view('ip_owners_delete', [
@@ -89,11 +89,12 @@ class IpOwnersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ip_owners_delete_post($id)
+    public function ipOwnersDeletePost($id)
     {
 
-        $ip_owner = Owner::findOrFail($id);
-        $ip_owner->delete();
+        $ipOwner = Owner::findOrFail($id);
+        $ipOwner->delete();
         return redirect('/ip_owners');
     }
+
 }

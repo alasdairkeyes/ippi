@@ -5,17 +5,17 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">IP Range {{ $ip_range->network_cidr() }} addresses</div>
+                <div class="panel-heading">IP Range {{ $ip_range->networkCidr() }} addresses</div>
 
                 <div class="panel-body">
                     <ul class="list-group">
                       <li class="list-group-item"><b>Owner:</b> {{ $ip_range->owner->name }}</li>
                       <li class="list-group-item">
                         <b>Range:</b>
-                            {{ $ip_range->network_cidr() }} ( {{ $ip_range->ip_addresses_total() }} addresses total, {{ $ip_range->ip_addresses_available() }} assignable )<br/>
+                            {{ $ip_range->networkCidr() }} ( {{ $ip_range->ipAddressesTotal() }} addresses total, {{ $ip_range->ipAddressesAvailable() }} assignable )<br/>
                             @include('shards.ip_range_usage')
                       </li>
-                      <li class="list-group-item"><b>IP Version:</b> {{ $ip_range->ip_version }}</li>
+                      <li class="list-group-item"><b>IP Version:</b> {{ $ip_range->ipVersion }}</li>
                     </ul>
                 </div>
 
@@ -31,10 +31,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($ip_range->iterate_ip_addresses() as $ip_address_array)
+                      @foreach ($ip_range->iterateIpAddresses() as $ip_address_array)
                         <?php
                             $row_class = '';
-                            if ($ip_range->is_reserved_address($ip_address_array[0])) {
+                            if ($ip_range->isReservedAddress($ip_address_array[0])) {
                                 $row_class = 'danger';
                             } elseif ($ip_address_array[1]) {
                                 $row_class = 'success';
@@ -46,14 +46,14 @@
                           <td>
                               @if ($ip_address_array[1]) 
                                 <span title="{{ $ip_address_array[1]->description }}">{{ substr($ip_address_array[1]->description,0,30) }}</span>
-                              @elseif ($ip_range->is_reserved_address($ip_address_array[0]))
+                              @elseif ($ip_range->isReservedAddress($ip_address_array[0]))
                                 Reserved by IP Protocol
                               @else
                                 -
                               @endif
                           </td>
                           <td>
-                              @if (!$ip_range->is_reserved_address($ip_address_array[0]))
+                              @if (!$ip_range->isReservedAddress($ip_address_array[0]))
                                 <a href="/ip_ranges/{{ $ip_range->id }}/ip_addresses/{{ $ip_address_array[0] }}" title="Update '{{ $ip_address_array[0] }}'"><span class="glyphicon glyphicon-pencil" aria-hidden=true></span></a>
                               @endif
                               @if ( $ip_address_array[1] )

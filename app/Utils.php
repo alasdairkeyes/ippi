@@ -11,7 +11,7 @@ namespace App\Utils;
      * @return string
      */
 
-    function random_string($length = 10, $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {
+    function randomString($length = 10, $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {
         $charactersLength = strlen($characters);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
@@ -29,8 +29,8 @@ namespace App\Utils;
      * @return string
      */
 
-    function random_password($length = 10, $characters = '23456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ!$%^&*()-_=+[]{}#~,.<>?') {
-        return random_string($lenght, $characters);
+    function randomPassword($length = 10, $characters = '23456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ!$%^&*()-_=+[]{}#~,.<>?') {
+        return randomString($length, $characters);
     }
 
 
@@ -40,7 +40,7 @@ namespace App\Utils;
      * @param string $hostname Hostname to check
      * @return bool
      */
-    function valid_hostname($hostname) {
+    function validHostname($hostname) {
         if (preg_match('/^(?=.{1,255}$)[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?(?:\.[0-9A-Za-z](?:(?:[0-9A-Za-z]|-){0,61}[0-9A-Za-z])?)*\.?$/', $hostname)) {
             return true;
         }

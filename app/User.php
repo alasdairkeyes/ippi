@@ -24,13 +24,13 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function user_roles()
+    public function userRoles()
     {
         return $this->HasMany(UserRole::class);
     }
 
 
-    public function assign_role($roles = [])
+    public function assignRole($roles = [])
     {
         foreach ($roles as $role) {
             $this->user_roles()->create([

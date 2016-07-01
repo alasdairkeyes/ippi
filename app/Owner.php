@@ -9,12 +9,13 @@ class Owner extends Model
     //
     protected $fillable = ['name','description'];
 
-    public function ip_ranges()
+    public function ipRanges()
     {
         return $this->HasMany(IpRange::class);
     }
 
-    public function number_of_ranges() {
-        return count($this->ip_ranges);
+    public function numberOfRanges()
+    {
+        return count($this->ipRanges);
     }
 }

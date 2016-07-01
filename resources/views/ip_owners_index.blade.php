@@ -30,7 +30,7 @@
                       <tr>
                         <td>{{ $ip_owner->name }}</td>
                         <td><span title="{{ $ip_owner->description }}">{{ $ip_owner->description }}</td>
-                        <td>{{ $ip_owner->number_of_ranges() }}</td>
+                        <td>{{ $ip_owner->numberOfRanges() }}</td>
                         <td>
                             <a href="/ip_owners/{{ $ip_owner->id }}/delete" title="Delete '{{ $ip_owner->name }}'"><span class="glyphicon glyphicon-trash" aria-hidden=true></span></a>
                         </td>

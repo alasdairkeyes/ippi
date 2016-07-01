@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class IpAddress extends Model
 {
     //
-    public function ip_range()
+    public $fillable = [ 'address', 'hostname', 'description' ];
+
+    public function ipRange()
     {
         return $this->belongsTo(IpRange::class);
     }
@@ -19,14 +21,16 @@ class IpAddress extends Model
 
     // TODO: Look at maybe direct access to PDO as the results of this could be large and want
     //       to reduce memory footprint and number of SQL statements run
-    public static function get_list_of_ip_range_ip_addresses($ip_range_id) {
-        $ip_range_ip_addresses = IpAddress::where('ip_range_id', $ip_range_id)->get();
+    public static function getListOfIpRangeIpAddresses($ipRangeId)
+    {
+        $ipRangeIpAddresses = IpAddress::where('ip_range_id', $ipRangeId)->get();
 
-        $ip_addresses = [];
-        foreach ($ip_range_ip_addresses as $ip_address) {
-            array_push($ip_addresses,$ip_address->address);
+        $ipAddresses = [];
+        foreach ($ipRangeIpAddresses as $ipAddress)
+        {
+            array_push($ipAddresses,$ipAddress->address);
         }
-        return $ip_addresses;
+        return $ipAddresses;
 
     }
 }

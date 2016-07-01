@@ -16,16 +16,20 @@ Route::auth();
 Route::get('/', 'HomeController@index');
 
 
-Route::get('/ip_ranges',                'IpRangesController@ip_ranges_index');
-Route::get('/ip_ranges/{id}',           'IpRangesController@ip_ranges_view');
-Route::get('/ip_ranges/add',            'IpRangesController@ip_ranges_add');
-Route::post('/ip_ranges/add',           'IpRangesController@ip_ranges_add_post');
-Route::get('/ip_ranges/{id}/delete/',   'IpRangesController@ip_ranges_delete');
-Route::post('/ip_ranges/{id}/delete/',  'IpRangesController@ip_ranges_delete_post');
+Route::get('/ip_ranges',                'IpRangesController@ipRangesIndex');
+Route::get('/ip_ranges/add',            'IpRangesController@ipRangesAdd');
+Route::post('/ip_ranges/add',           'IpRangesController@ipRangesAddPost');
+Route::get('/ip_ranges/{id}',           'IpRangesController@ipRangesView');
+Route::get('/ip_ranges/{id}/delete/',   'IpRangesController@ipRangesDelete');
+Route::post('/ip_ranges/{id}/delete/',  'IpRangesController@ipRangesDeletePost');
 
 
-Route::get('/ip_owners',                'IpOwnersController@ip_owners_index');
-Route::get('/ip_owners/add',            'IpOwnersController@ip_owners_add');
-Route::post('/ip_owners/add',           'IpOwnersController@ip_owners_add_post');
-Route::get('/ip_owners/{id}/delete/',   'IpOwnersController@ip_owners_delete');
-Route::post('/ip_owners/{id}/delete/',  'IpOwnersController@ip_owners_delete_post');
+Route::get('/ip_ranges/{id}/ip_addresses/{ip_address}',  'IpRangesController@ipRangesIpAddressesView');
+Route::post('/ip_ranges/{id}/ip_addresses/{ip_address}', 'IpRangesController@ipRangesIpAddressesViewPost');
+
+
+Route::get('/ip_owners',                'IpOwnersController@ipOwnersIndex');
+Route::get('/ip_owners/add',            'IpOwnersController@ipOwnersAdd');
+Route::post('/ip_owners/add',           'IpOwnersController@ipOwnersAddPost');
+Route::get('/ip_owners/{id}/delete/',   'IpOwnersController@ipOwnersDelete');
+Route::post('/ip_owners/{id}/delete/',  'IpOwnersController@ipOwnersDeletePost');
