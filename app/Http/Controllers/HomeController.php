@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
+
+use App\IpRange;
+use App\Owner;
+
 class HomeController extends Controller
 {
     /**
@@ -24,6 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'ipRangeCount' => IpRange::count(),
+            'ipOwnerCount' => Owner::count(),
+        ]);
     }
 }
