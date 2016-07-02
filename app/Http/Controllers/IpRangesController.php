@@ -144,7 +144,7 @@ class IpRangesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function ipRangesIpAddressesView(Request $request, $id, $ipAddressString) {
+    public function ipRangesIpAddressView(Request $request, $id, $ipAddressString) {
         // Get Range
         $ipRange   =  IpRange::findOrFail($id);
 
@@ -158,7 +158,7 @@ class IpRangesController extends Controller
         ]);
     }
 
-    public function ipRangesIpAddressesViewPost(Request $request, $id, $ipAddressString) {
+    public function ipRangesIpAddressViewPost(Request $request, $id, $ipAddressString) {
         // Get Range
         $ipRange   =  IpRange::findOrFail($id);
 

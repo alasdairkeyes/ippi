@@ -24,8 +24,8 @@ Route::get('/ip_ranges/{id}/delete/',   'IpRangesController@ipRangesDelete');
 Route::post('/ip_ranges/{id}/delete/',  'IpRangesController@ipRangesDeletePost');
 
 
-Route::get('/ip_ranges/{id}/ip_addresses/{ip_address}',  'IpRangesController@ipRangesIpAddressesView');
-Route::post('/ip_ranges/{id}/ip_addresses/{ip_address}', 'IpRangesController@ipRangesIpAddressesViewPost');
+Route::get('/ip_ranges/{id}/{ip_address}',  'IpRangesController@ipRangesIpAddressView');
+Route::post('/ip_ranges/{id}/{ip_address}', 'IpRangesController@ipRangesIpAddressViewPost');
 
 
 Route::get('/ip_owners',                'IpOwnersController@ipOwnersIndex');
