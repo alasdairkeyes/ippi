@@ -11,6 +11,16 @@ use App\Owner;
 class IpOwnersController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Show the /ip_ranges path
      *
      * @return \Illuminate\Http\Response

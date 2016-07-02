@@ -16,6 +16,16 @@ use function App\Utils\validHostname;
 class IpRangesController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Show the .
      *
      * @return \Illuminate\Http\Response
