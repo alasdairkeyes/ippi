@@ -191,4 +191,47 @@ class IpRangesController extends Controller
 
         return redirect('/ip_ranges/' . $ipRange->id);
     }
+
+
+    /**
+     * Edit/Update the an IP address
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ipRangesIpAddressDelete(Request $request, $id, $ipAddressString) {
+        // Get Range
+        $ipRange   =  IpRange::findOrFail($id);
+
+        // Get IP Address
+        $ipAddress =  $ipRange->ipAddresses()->where('address', $ipAddressString)->first();
+
+        if (!$ipAddress) {
+            \App::abort(404);
+        }
+
+        return view('ip_ranges_ip_addresses_delete', [
+            'ip_address'        => $ipAddress,
+        ]);
+    }
+
+
+    /**
+     * Post to the /ip_ranges/{id}/{ipAddress}/delete path
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ipRangesIpAddressDeletePost($id, $ipAddressString)
+    {
+
+        $ipRange = IpRange::findOrFail($id);
+        // Get IP Address
+        $ipAddress =  $ipRange->ipAddresses()->where('address', $ipAddressString)->first();
+        if (!$ipAddress) {
+            \App::abort(404);
+        }
+
+
+        $ipAddress->delete();
+        return redirect('/ip_ranges/' . $ipRange->id);
+    }
 }
