@@ -1,0 +1,12 @@
+body {
+    font-family: 'Lato';
+}
+
+.fa-btn {
+    margin-right: 6px;
+}
+
+.large-home-text {
+    font-size: 55px;
+    font-weight: bold;
+}
