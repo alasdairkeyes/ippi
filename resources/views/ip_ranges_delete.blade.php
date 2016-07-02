@@ -5,13 +5,13 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Delete IP Range <em>{{ $ip_range->networkCidr() }}</em></div>
+                <div class="panel-heading">Delete IP Range <em>{{ $ipRange->networkCidr() }}</em></div>
                 <div class="panel-body">
 
                     <p>Do you really want to delete this IP Range</p>
 
-                    @if ($ip_range->ipAddressesInUse()) 
-                        <p>There are currently {{ $ip_range->ipAddressesInUse() }} IP addresses in this range assigned</p>
+                    @if ($ipRange->ipAddressesInUse()) 
+                        <p>There are currently {{ $ipRange->ipAddressesInUse() }} IP addresses in this range assigned</p>
                         <p>If you delete them, all this information will be removed</p>
                     @else
                         <p>No IP addresses in this range have been assigned</p>

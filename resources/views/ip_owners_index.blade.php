@@ -26,20 +26,20 @@
 
                       @include('shards.add_owner_row')
 
-                      @foreach ($ip_owners as $ip_owner)
+                      @foreach ($ipOwners as $ipOwner)
                       <tr>
-                        <td>{{ $ip_owner->name }}</td>
-                        <td><span title="{{ $ip_owner->description }}">{{ $ip_owner->description }}</td>
-                        <td>{{ $ip_owner->numberOfRanges() }}</td>
+                        <td>{{ $ipOwner->name }}</td>
+                        <td><span title="{{ $ipOwner->description }}">{{ $ipOwner->description }}</td>
+                        <td>{{ $ipOwner->numberOfRanges() }}</td>
                         <td>
-                            <a href="/ip_owners/{{ $ip_owner->id }}/delete" title="Delete '{{ $ip_owner->name }}'"><span class="glyphicon glyphicon-trash" aria-hidden=true></span></a>
+                            <a href="/ip_owners/{{ $ipOwner->id }}/delete" title="Delete '{{ $ipOwner->name }}'"><span class="glyphicon glyphicon-trash" aria-hidden=true></span></a>
                         </td>
                         <td>&nbsp;</td>
                       </tr>
                       @endforeach
 
 
-                      @if (count($ip_owners) > 10)
+                      @if (count($ipOwners) > 10)
                         @include('shards.add_owner_row')
                       @endif
 

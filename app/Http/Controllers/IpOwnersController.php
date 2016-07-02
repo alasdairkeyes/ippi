@@ -29,7 +29,7 @@ class IpOwnersController extends Controller
     {
         $ip_owners = Owner::all();
         return view('ip_owners_index', [
-            'ip_owners' => $ip_owners,
+            'ipOwners' => $ip_owners,
         ]);
     }
 
@@ -89,7 +89,7 @@ class IpOwnersController extends Controller
     {
 
         return view('ip_owners_delete', [
-            'ip_owner'  => Owner::findOrFail($id),
+            'ipOwner'  => Owner::findOrFail($id),
         ]);
     }
 

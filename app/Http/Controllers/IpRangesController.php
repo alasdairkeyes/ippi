@@ -34,7 +34,7 @@ class IpRangesController extends Controller
     {
         $ip_ranges = IpRange::all();
         return view('ip_ranges_index', [
-            'ip_ranges' => $ip_ranges,
+            'ipRanges' => $ip_ranges,
         ]);
     }
 
@@ -48,7 +48,7 @@ class IpRangesController extends Controller
     {
 
         return view('ip_ranges_add', [
-            'ip_owners' => Owner::all(),
+            'ipOwners' => Owner::all(),
         ]);
     }
 
@@ -117,7 +117,7 @@ class IpRangesController extends Controller
     {
 
         return view('ip_ranges_delete', [
-            'ip_range'  => IpRange::findOrFail($id),
+            'ipRange'  => IpRange::findOrFail($id),
         ]);
     }
 
@@ -144,7 +144,7 @@ class IpRangesController extends Controller
     {
         $ipRange =  IpRange::findOrFail($id);
         return view('ip_ranges_view', [
-            'ip_range'  => $ipRange,
+            'ipRange'  => $ipRange,
         ]);
     }
 
@@ -162,9 +162,9 @@ class IpRangesController extends Controller
         $ipAddress =  $ipRange->ipAddresses()->where('address', $ipAddressString)->first();
 
         return view('ip_ranges_ip_addresses_view', [
-            'ip_range'          => $ipRange,
-            'ip_address'        => $ipAddress,
-            'ip_address_string' => $ipAddressString,
+            'ipRange'          => $ipRange,
+            'ipAddress'        => $ipAddress,
+            'ipAddressString' => $ipAddressString,
         ]);
     }
 
@@ -220,7 +220,7 @@ class IpRangesController extends Controller
         }
 
         return view('ip_ranges_ip_addresses_delete', [
-            'ip_address'        => $ipAddress,
+            'ipAddress'        => $ipAddress,
         ]);
     }
 

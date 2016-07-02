@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Delete IP Address <em>{{ $ip_address->address }}</em></div>
+                <div class="panel-heading">Delete IP Address <em>{{ $ipAddress->address }}</em></div>
                 <div class="panel-body">
 
                     <p>Do you really want to clear this IP Address</p>
@@ -23,7 +23,7 @@
                         </div>
                     </form>
 
-                    <form class="form-horizontal" role="form" method="GET" action="{{ url('/ip_ranges/' . $ip_address->ip_range_id . '/' . $ip_address->address ) }}">
+                    <form class="form-horizontal" role="form" method="GET" action="{{ url('/ip_ranges/' . $ipAddress->ip_range_id  ) }}">
                         {{ csrf_field() }}
 
                         <div class="form-group">
