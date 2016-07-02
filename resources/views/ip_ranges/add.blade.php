@@ -43,12 +43,12 @@
 
                             <div class="col-md-6">
                                 <select id="owner_id" name="owner_id" class="form-control">
-                                    @foreach ($ip_owners as $ip_owner)
-                                        <option value="{{ $ip_owner->id }}"
-                                            @if (old('owner_id') == $ip_owner->id)
+                                    @foreach ($ipOwners as $ipOwner)
+                                        <option value="{{ $ipOwner->id }}"
+                                            @if (old('owner_id') == $ipOwner->id)
                                                 selected
                                             @endif
-                                        >{{ $ip_owner->name }}</option>
+                                        >{{ $ipOwner->name }}</option>
                                     @endforeach
                                 </select>
 

@@ -28,7 +28,7 @@ class IpOwnersController extends Controller
     public function ipOwnersIndex()
     {
         $ip_owners = Owner::all();
-        return view('ip_owners_index', [
+        return view('ip_owners.index', [
             'ipOwners' => $ip_owners,
         ]);
     }
@@ -42,7 +42,7 @@ class IpOwnersController extends Controller
     public function ipOwnersAdd(Request $request)
     {
 
-        return view('ip_owners_add', []);
+        return view('ip_owners.add', []);
     }
 
 
@@ -88,7 +88,7 @@ class IpOwnersController extends Controller
     public function ipOwnersDelete($id)
     {
 
-        return view('ip_owners_delete', [
+        return view('ip_owners.delete', [
             'ipOwner'  => Owner::findOrFail($id),
         ]);
     }
