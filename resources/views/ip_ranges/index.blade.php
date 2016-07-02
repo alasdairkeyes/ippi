@@ -30,7 +30,7 @@
                       <tr>
                         <td>{{ $ipRange->networkCidr() }}</td>
                         <td>{{ $ipRange->owner->name }}</td>
-                        <td>IPv{{ $ipRange->ipVersion }}</td>
+                        <td>IPv{{ $ipRange->ip_version }}</td>
                         <td>
                             @include('shards.ip_range_usage')
                         </td>
