@@ -35,3 +35,6 @@ Route::get('/ip_owners/add',            'IpOwnersController@ipOwnersAdd');
 Route::post('/ip_owners/add',           'IpOwnersController@ipOwnersAddPost');
 Route::get('/ip_owners/{id}/delete/',   'IpOwnersController@ipOwnersDelete');
 Route::post('/ip_owners/{id}/delete/',  'IpOwnersController@ipOwnersDeletePost');
+
+Route::get('/settings',                 'SettingsController@settingsIndex');
+Route::post('/settings',                'SettingsController@settingsIndexPost');
